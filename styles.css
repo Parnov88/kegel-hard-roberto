@@ -1,0 +1,981 @@
+/* ============================================
+   KEGEL HARD — ROBERTO (20 anos)
+   Estética: Neural Interface / Biohacking
+   ============================================ */
+
+:root {
+  --void: #0B0B1A;
+  --cortex: #161628;
+  --synapse: #7B61FF;
+  --signal: #E0E0EC;
+  --noise: #6B6B80;
+  --error: #E05252;
+  --success: #4ADE80;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--void);
+  color: var(--signal);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---- TYPOGRAPHY ---- */
+
+h1 {
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.synapse {
+  color: var(--synapse);
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--synapse);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+/* ---- BUTTONS ---- */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary {
+  background: var(--synapse);
+  color: #fff;
+  padding: 18px 28px;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 12px;
+  background: var(--synapse);
+  opacity: 0;
+  z-index: -1;
+  filter: blur(16px);
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(123, 97, 255, 0.3);
+}
+
+.btn-primary:hover::after {
+  opacity: 0.4;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-large {
+  font-size: 1.05rem;
+  padding: 20px 32px;
+}
+
+/* ============================================
+   NEURAL GRID BACKGROUND
+   ============================================ */
+
+.neural-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--noise);
+  opacity: 0.15;
+}
+
+.dot.active {
+  background: var(--synapse);
+  opacity: 0.3;
+  animation: synapsePulse 3s ease-in-out infinite;
+}
+
+.dot.active:nth-child(3) { animation-delay: 0.8s; }
+.dot.active:nth-child(6) { animation-delay: 1.6s; }
+.dot.active:nth-child(8) { animation-delay: 2.4s; }
+.dot.active:nth-child(11) { animation-delay: 0.4s; }
+
+@keyframes synapsePulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.8); }
+}
+
+/* All sections above neural grid */
+section, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  padding: 48px 0 56px;
+}
+
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--synapse);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  color: var(--noise);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 540px;
+}
+
+.hero .btn-primary {
+  margin-bottom: 24px;
+}
+
+.status-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.status-lines span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--noise);
+}
+
+.status-lines em {
+  font-style: normal;
+  color: var(--synapse);
+}
+
+/* Receptor diagram (desktop) */
+.hero-visual {
+  display: none;
+}
+
+.receptor-diagram {
+  background: var(--cortex);
+  border: 1px solid rgba(123,97,255,0.12);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.receptor-row {
+  margin-bottom: 20px;
+}
+
+.receptor-row:last-child {
+  margin-bottom: 0;
+}
+
+.receptor-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--noise);
+  margin-bottom: 8px;
+}
+
+.receptor-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.r-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.r-dot.on {
+  border-color: var(--synapse);
+  background: rgba(123,97,255,0.25);
+  box-shadow: 0 0 8px rgba(123,97,255,0.3);
+}
+
+.r-dot.off {
+  border-color: rgba(107,107,128,0.3);
+  background: transparent;
+}
+
+.r-dot.dim {
+  border-color: rgba(123,97,255,0.35);
+  background: rgba(123,97,255,0.08);
+}
+
+.recovering .r-dot.on {
+  animation: recoverPulse 2s ease-in-out infinite;
+}
+
+.recovering .r-dot.on:nth-child(2) { animation-delay: 0.3s; }
+.recovering .r-dot.on:nth-child(3) { animation-delay: 0.6s; }
+.recovering .r-dot.on:nth-child(4) { animation-delay: 0.9s; }
+.recovering .r-dot.on:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes recoverPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(123,97,255,0.2); }
+  50% { box-shadow: 0 0 12px rgba(123,97,255,0.5); }
+}
+
+/* ============================================
+   IDENTIFICATION (PAIN)
+   ============================================ */
+
+.identification {
+  padding: 56px 0;
+  background: var(--cortex);
+}
+
+.id-card {
+  background: var(--void);
+  border: 1px solid rgba(123,97,255,0.15);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 20px 0 28px;
+  box-shadow: 0 0 24px rgba(123,97,255,0.04);
+}
+
+.id-card p {
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.check-item.active {
+  background: rgba(224,82,82,0.06);
+  border: 1px solid rgba(224,82,82,0.12);
+  color: var(--signal);
+}
+
+.check-item.inactive {
+  background: rgba(74,222,128,0.04);
+  border: 1px solid rgba(74,222,128,0.08);
+  color: var(--noise);
+  text-decoration: line-through;
+  text-decoration-color: rgba(107,107,128,0.3);
+}
+
+.check-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.check-dot.on {
+  background: var(--error);
+  box-shadow: 0 0 6px rgba(224,82,82,0.4);
+}
+
+.check-dot.off {
+  background: var(--success);
+  opacity: 0.4;
+}
+
+/* ============================================
+   DIAGNOSTIC (MECHANISM)
+   ============================================ */
+
+.diagnostic {
+  padding: 56px 0;
+}
+
+.bug-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.bug-card {
+  background: var(--cortex);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(123,97,255,0.08);
+}
+
+.bug-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--error);
+  margin-bottom: 10px;
+}
+
+.bug-card h3 {
+  margin-bottom: 16px;
+}
+
+.bug-card > p {
+  font-size: 0.9rem;
+  color: var(--noise);
+  line-height: 1.65;
+}
+
+.bug-card > p strong {
+  color: var(--signal);
+}
+
+/* Threshold diagram */
+.threshold-diagram {
+  margin-bottom: 16px;
+}
+
+.threshold-bar {
+  position: relative;
+  background: rgba(123,97,255,0.06);
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.threshold-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.threshold-line::before {
+  content: '';
+  flex: 1;
+  height: 2px;
+}
+
+.threshold-line.normal::before {
+  background: var(--success);
+  opacity: 0.5;
+}
+
+.threshold-line.elevated::before {
+  background: var(--error);
+  opacity: 0.7;
+}
+
+.threshold-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.threshold-line.normal .threshold-tag {
+  color: var(--success);
+  opacity: 0.7;
+}
+
+.threshold-line.elevated .threshold-tag {
+  color: var(--error);
+}
+
+.threshold-zone {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.threshold-zone span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--noise);
+  background: rgba(107,107,128,0.15);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Atrophy visual */
+.atrophy-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.muscle-state {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.muscle-state .muscle-bar {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+.muscle-state.weak .muscle-bar {
+  width: 30%;
+  background: var(--error);
+  opacity: 0.6;
+}
+
+.muscle-state.strong .muscle-bar {
+  width: 80%;
+  background: var(--synapse);
+}
+
+.muscle-state span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: var(--noise);
+  white-space: nowrap;
+}
+
+.conclusion-line {
+  background: var(--cortex);
+  border-left: 3px solid var(--synapse);
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 24px;
+}
+
+/* Study card */
+.study-card {
+  background: var(--cortex);
+  border: 1px solid rgba(123,97,255,0.12);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.study-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--synapse);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.study-card p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--noise);
+}
+
+.study-card strong {
+  color: var(--signal);
+}
+
+/* ============================================
+   PATCH (SOLUTION)
+   ============================================ */
+
+.patch {
+  padding: 56px 0;
+  background: var(--cortex);
+}
+
+.patch-intro {
+  color: var(--noise);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.patch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 28px;
+}
+
+.patch-item {
+  display: flex;
+  background: var(--void);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.patch-item:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.patch-item:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
+.patch-bar {
+  width: 4px;
+  background: var(--synapse);
+  flex-shrink: 0;
+}
+
+.patch-content {
+  padding: 18px 20px;
+  flex: 1;
+}
+
+.patch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--synapse);
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.patch-content strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.patch-content p {
+  font-size: 0.85rem;
+  color: var(--noise);
+  line-height: 1.5;
+}
+
+.neuro-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(123,97,255,0.06);
+  border: 1px solid rgba(123,97,255,0.15);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.neuro-highlight svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.neuro-highlight p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--signal);
+}
+
+/* ============================================
+   PROOF
+   ============================================ */
+
+.proof {
+  padding: 56px 0;
+}
+
+.case-card {
+  background: var(--cortex);
+  border-radius: 12px;
+  padding: 28px 24px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(123,97,255,0.08);
+}
+
+.case-quote {
+  font-size: 2.5rem;
+  color: var(--synapse);
+  line-height: 1;
+  opacity: 0.4;
+  margin-bottom: 4px;
+}
+
+.case-card > p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  font-style: italic;
+  color: var(--signal);
+  margin-bottom: 20px;
+}
+
+.case-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.case-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(123,97,255,0.12);
+  color: var(--synapse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.case-author strong {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.case-author span {
+  font-size: 0.75rem;
+  color: var(--noise);
+}
+
+.trust-badges {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cortex);
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   ACCESS (OFFER)
+   ============================================ */
+
+.access {
+  padding: 56px 0;
+  background: var(--cortex);
+  text-align: center;
+}
+
+.access-box {
+  background: var(--void);
+  border: 1px solid rgba(123,97,255,0.15);
+  border-radius: 16px;
+  padding: 36px 24px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.price-was {
+  font-size: 0.9rem;
+  color: var(--noise);
+  margin-bottom: 4px;
+}
+
+.price-was s {
+  color: var(--error);
+  text-decoration: line-through;
+}
+
+.price-now {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.75rem;
+  font-weight: 500;
+  color: var(--synapse);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.price-note {
+  font-size: 0.8rem;
+  color: var(--noise);
+  margin-bottom: 28px;
+}
+
+.access .btn-primary {
+  margin: 0 auto;
+}
+
+/* ============================================
+   GUARANTEE
+   ============================================ */
+
+.guarantee {
+  padding: 56px 0;
+}
+
+.guarantee-box {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.guarantee-box svg {
+  margin-bottom: 16px;
+}
+
+.guarantee-box h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+
+.guarantee-box p {
+  font-size: 0.9rem;
+  color: var(--noise);
+  line-height: 1.7;
+}
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+
+.final-cta {
+  padding: 64px 0;
+  background: linear-gradient(180deg, var(--cortex) 0%, var(--void) 100%);
+  text-align: center;
+}
+
+.final-cta h2 {
+  font-size: 1.375rem;
+  margin-bottom: 12px;
+}
+
+.final-cta p {
+  color: var(--noise);
+  margin-bottom: 28px;
+  font-size: 0.95rem;
+}
+
+.final-cta .btn-primary {
+  margin: 0 auto 20px;
+}
+
+.final-meta {
+  font-size: 0.8rem;
+  color: var(--noise);
+}
+
+.final-meta span {
+  font-weight: 600;
+  color: var(--signal);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid rgba(107,107,128,0.1);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: var(--noise);
+  margin-bottom: 4px;
+}
+
+.footer-disclaimer {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+/* ============================================
+   DESKTOP (768px+)
+   ============================================ */
+
+@media (min-width: 768px) {
+
+  h1 {
+    font-size: 2.625rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    padding: 0 40px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 72px 0 88px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .hero-visual {
+    display: block;
+  }
+
+  /* Identification */
+  .identification {
+    padding: 72px 0;
+  }
+
+  .check-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* Diagnostic */
+  .diagnostic {
+    padding: 72px 0;
+  }
+
+  .bug-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* Patch */
+  .patch {
+    padding: 72px 0;
+  }
+
+  /* Proof */
+  .proof {
+    padding: 72px 0;
+  }
+
+  .trust-badges {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Access */
+  .access {
+    padding: 72px 0;
+  }
+
+  .price-now {
+    font-size: 3.25rem;
+  }
+
+  /* Guarantee */
+  .guarantee {
+    padding: 72px 0;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: 88px 0;
+  }
+
+  .final-cta h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* ============================================
+   LARGE DESKTOP (1200px+)
+   ============================================ */
+
+@media (min-width: 1200px) {
+
+  h1 {
+    font-size: 2.875rem;
+  }
+
+  .container {
+    max-width: 1060px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 340px;
+    gap: 56px;
+  }
+}
