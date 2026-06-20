@@ -129,6 +129,15 @@ h3 {
   transform: translateY(0);
 }
 
+.vsl-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 28px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(123, 97, 255, 0.1);
+}
+
 .btn-large {
   font-size: 1.05rem;
   padding: 20px 32px;
